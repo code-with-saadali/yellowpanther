@@ -1,5 +1,6 @@
 import About from "./_components/About";
 import FaqSection from "./_components/FaqSection";
+import Footer from "./_components/Footer";
 import GiveUsAScratch from "./_components/GiveUsAScratch";
 import Hero from "./_components/Hero";
 import LenisScroll from "./_components/LenisScroll";
@@ -20,6 +21,7 @@ export default function Home() {
       <Marquee/>
       <FaqSection/>
       <GiveUsAScratch/>
+      <Footer/>
     </>
   );
 }

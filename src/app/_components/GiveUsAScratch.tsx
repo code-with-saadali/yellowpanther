@@ -1,7 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
-import Image from "next/image";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+
 import React, { useEffect, useState } from "react";
 
 const getTime = (timeZone: string) =>
@@ -76,12 +81,7 @@ const GiveUsAScratch = () => {
         onMouseLeave={() => setShowCursor(false)}
         className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-wide mb-10 flex justify-center items-center gap-2"
       >
-        GIVE
-        <span className="relative group flex items-center">
-          US
-          <Image src="https://ik.imagekit.io/msmrd69gi/e9e16a41870703.5607091e53b51.jpg?updatedAt=1750949958488" alt="" width={200} height={120} className="rounded-full hidden group-hover:flex transition-all"/>
-        </span>
-        A SCRATCH
+        GIVE US A SCRATCH
       </h1>
       <div className="w-full h-[0.5px] bg-white"></div>
 
