@@ -1,12 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Typewriter } from "react-simple-typewriter";
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import AnimatedBackground from "./AnimatedBackground";
+import Image from "next/image";
 
 const Hero = () => {
   const [showCursor, setShowCursor] = useState(false);
 
- const cursorX = useMotionValue(0);
+  const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   const springX = useSpring(cursorX, { stiffness: 300, damping: 30 });
   const springY = useSpring(cursorY, { stiffness: 300, damping: 30 });
@@ -22,47 +29,117 @@ const Hero = () => {
 
   return (
     <div className="relative h-screen w-full overflow-hidden text-white">
-     <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-50" />
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-20"
-      >
-        <source src="https://ik.imagekit.io/msmrd69gi/4.mp4?updatedAt=1753711900872" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      <AnimatedBackground />
+      <AnimatePresence>
+        {showCursor && (
+          <motion.div
+            className="fixed z-[9999] pointer-events-none w-28 h-28"
+            style={{ top: springY, left: springX }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.15 } }}
+            transition={{
+              type: "spring",
+              stiffness: 420,
+              damping: 20,
+              mass: 0.5,
+            }}
+          >
+            {/* Floating Particles */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_2px_rgba(255,255,255,0.3)]"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
+                  x: `calc(${Math.cos((i * 45 * Math.PI) / 180)} * 1.8rem)`,
+                  y: `calc(${Math.sin((i * 45 * Math.PI) / 180)} * 1.8rem)`,
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                  repeatDelay: 0.5,
+                }}
+              />
+            ))}
 
-      {/* Animated Cursor */}
-       <AnimatePresence>
-              {showCursor && (
+            {/* Main Cursor */}
+            <div className="relative w-full h-full">
+              {/* Subtle glow background */}
+              <div className="absolute inset-0 rounded-full bg-white opacity-10 blur-sm" />
+
+              {/* Animated border */}
+              <motion.div
+                className="absolute inset-0 rounded-full border-[2px] border-white"
+                animate={{
+                  boxShadow: [
+                    "0 0 10px rgba(255,255,255,0.2)",
+                    "0 0 15px rgba(255,255,255,0.3)",
+                    "0 0 10px rgba(255,255,255,0.2)",
+                  ],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Inner Circle */}
+              <div className="absolute inset-2 rounded-full bg-black backdrop-blur-md flex items-center justify-center">
+                {/* Rotating Text */}
                 <motion.div
-                  className="fixed z-[9999] pointer-events-none"
-                  style={{
-                    top: springY,
-                    left: springX,
-                    width: 56,
-                    height: 56,
+                  className="absolute inset-0"
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 12,
+                    ease: "linear",
                   }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div
-                    className="w-20 h-20 bg-black text-white text-[15px] font-semibold rounded-full flex items-center justify-center shadow-xl ring-4 ring-gray-300 select-none tracking-wide"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      textShadow: "0 0 8px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    Explore
-                  </div>
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <path
+                        id="circlePath"
+                        d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"
+                      />
+                    </defs>
+                    <text
+                      fill="white"
+                      fontSize="7"
+                      fontFamily="'Poppins', sans-serif"
+                      fontWeight="600"
+                      letterSpacing="2"
+                    >
+                      <textPath href="#circlePath" startOffset="0%">
+                        ✦ PLAY SHOWREEL ✦ PORTFOLIO ✦ SAAD ALI ✦
+                      </textPath>
+                    </text>
+                  </svg>
                 </motion.div>
-              )}
-            </AnimatePresence>
+
+                {/* Center Pulse */}
+                <motion.div
+                  className="w-3 h-3 bg-white rounded-full z-20"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 3,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  }}
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Text Content */}
       <div
@@ -78,7 +155,7 @@ const Hero = () => {
           CRAFTING MODERN <br /> WEB SOLUTIONS FOR BRANDS
         </h1>
 
-        <h2 className="text-xl md:text-2xl font-bold mb-6 max-lg:text-center">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-yellow-400 uppercase font-bold mb-6 max-lg:text-center">
           <Typewriter
             words={[
               "Responsive Web Design",
@@ -97,6 +174,70 @@ const Hero = () => {
           />
         </h2>
       </div>
+      <div className="absolute right-[4.5rem] top-0 h-full overflow-hidden z-40">
+        <motion.div
+          className="flex gap-5"
+          animate={{ y: ["-10%", "-10%"] }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        >
+          {[
+            [
+              "https://ik.imagekit.io/msmrd69gi/6PwRr1stmtvVieqWosE8Dk1Jz6g.avif?updatedAt=1751374392490",
+              "https://ik.imagekit.io/msmrd69gi/7aIt5C65gWrogDgGG1mWPFyzsM.avif?updatedAt=1751374392792",
+              "https://ik.imagekit.io/msmrd69gi/cfe4SQhxMtcArNzRWNEh6mklwxE.avif?updatedAt=1751110645452",
+              "https://ik.imagekit.io/msmrd69gi/0I9OXKFwQY8NzxtZyoeJZRtY.avif?updatedAt=1751109183654",
+            ],
+            [
+              "https://ik.imagekit.io/msmrd69gi/8Ou7m6Tc0flZz3yhClXwGhA8U.avif?updatedAt=1751107534201",
+              "https://ik.imagekit.io/msmrd69gi/5kkmtIf0TPYac8MJsDrCXhyIb0c.png?updatedAt=1750951146664",
+              "https://ik.imagekit.io/msmrd69gi/2006-glennon-wagner-charleston-backdrop-high-fashion-editorial-warmth-00006_web.jpg?updatedAt=1750947987875",
+              "https://ik.imagekit.io/msmrd69gi/L7AHuVIdi7CVQYRWpBHlTYdVPsc.png?updatedAt=1750330502343",
+            ],
+            [
+              "https://ik.imagekit.io/msmrd69gi/a6yHdu1OMuJ0monBsX1wo7Qo5pM.png?updatedAt=1750947953183f",
+              "https://ik.imagekit.io/msmrd69gi/zoimqmwmPzQCsx9m3c9GwJ1A0XU.png?updatedAt=1751096411867",
+              "https://ik.imagekit.io/msmrd69gi/80QJvYM3h4nosjsXGKDyoxZ2RU.png?updatedAt=1751100339228",
+              "https://ik.imagekit.io/msmrd69gi/rzbPtCB0tgIXOz1ypbASf10eVU.png?updatedAt=1751096412159",
+            ],
+          ].map((imageSet, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                y: i === 1 ? ["30%", "-10%"] : ["-10%", "30%"],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }}
+              className="flex flex-col gap-5"
+            >
+              {imageSet.map((imgSrc, j) => (
+                <div
+                  key={j}
+                  className="w-[145px] h-[290px] overflow-hidden rounded-full"
+                >
+                  <Image
+                    src={imgSrc}
+                    alt={`img-${i}-${j}`}
+                    width={160}
+                    height={120}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+              ))}
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+      <div className="absolute bottom-0 left-0 w-full h-22 bg-gradient-to-t from-black to-transparent z-50 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent z-50 pointer-events-none" />
     </div>
   );
 };

@@ -3,163 +3,123 @@
 import React, { useEffect, useRef } from 'react';
 
 const AnimatedBackground = () => {
-  const interactiveRef = useRef<HTMLDivElement>(null);
+  const blobRef1 = useRef<HTMLDivElement>(null);
+  const blobRef2 = useRef<HTMLDivElement>(null);
+  const blobRef3 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!interactiveRef.current) return;
+    let mouseX = 0;
+    let mouseY = 0;
 
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-    const interBubble = interactiveRef.current;
+    let currentX1 = 0, currentY1 = 0;
+    let currentX2 = 0, currentY2 = 0;
+    let currentX3 = 0, currentY3 = 0;
 
-    const move = () => {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(move);
+    const lerp = (start: number, end: number, factor: number) =>
+      start + (end - start) * factor;
+
+    const animate = () => {
+      currentX1 = lerp(currentX1, mouseX, 0.02);
+      currentY1 = lerp(currentY1, mouseY, 0.02);
+      currentX2 = lerp(currentX2, mouseX, 0.015);
+      currentY2 = lerp(currentY2, mouseY, 0.015);
+      currentX3 = lerp(currentX3, mouseX, 0.01);
+      currentY3 = lerp(currentY3, mouseY, 0.01);
+
+      if (blobRef1.current)
+        blobRef1.current.style.transform = `translate(${currentX1}px, ${currentY1}px)`;
+      if (blobRef2.current)
+        blobRef2.current.style.transform = `translate(${currentX2}px, ${currentY2}px)`;
+      if (blobRef3.current)
+        blobRef3.current.style.transform = `translate(${currentX3}px, ${currentY3}px)`;
+
+      requestAnimationFrame(animate);
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX - window.innerWidth / 2;
+      mouseY = e.clientY - window.innerHeight / 2;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    move();
+    animate();
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden">
-      <svg className="fixed top-0 left-0 w-0 h-0">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-              result="goo"
-            />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
-
-      <div 
-        className="w-full h-full"
-        style={{
-          filter: 'url(#goo) blur(40px)',
-          background: 'linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82))'
-        }}
-      >
-        {/* Gradient circles */}
-        <div 
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(18, 113, 255, 0.8) 0, rgba(18, 113, 255, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '80%',
-            height: '80%',
-            top: '10%',
-            left: '10%',
-            animation: 'moveVertical 30s ease infinite'
-          }}
-        ></div>
-        
-        <div 
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(221, 74, 255, 0.8) 0, rgba(221, 74, 255, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '80%',
-            height: '80%',
-            top: '10%',
-            left: '10%',
-            transformOrigin: 'calc(50% - 400px)',
-            animation: 'moveInCircle 20s reverse infinite'
-          }}
-        ></div>
-        
-        <div 
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(100, 220, 255, 0.8) 0, rgba(100, 220, 255, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '80%',
-            height: '80%',
-            top: 'calc(10% + 200px)',
-            left: 'calc(10% - 500px)',
-            transformOrigin: 'calc(50% + 400px)',
-            animation: 'moveInCircle 40s linear infinite'
-          }}
-        ></div>
-        
-        <div 
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(200, 50, 50, 0.7) 0, rgba(200, 50, 50, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '80%',
-            height: '80%',
-            top: '10%',
-            left: '10%',
-            transformOrigin: 'calc(50% - 200px)',
-            animation: 'moveHorizontal 40s ease infinite'
-          }}
-        ></div>
-        
-        <div 
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(180, 180, 50, 0.8) 0, rgba(180, 180, 50, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '160%',
-            height: '160%',
-            top: '-30%',
-            left: '-30%',
-            transformOrigin: 'calc(50% - 800px) calc(50% + 200px)',
-            animation: 'moveInCircle 20s ease infinite'
-          }}
-        ></div>
-        
-        {/* Interactive bubble */}
-        <div 
-          ref={interactiveRef}
-          className="absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(140, 100, 255, 0.7) 0, rgba(140, 100, 255, 0) 50%)',
-            mixBlendMode: 'hard-light',
-            width: '100%',
-            height: '100%',
-            top: '-50%',
-            left: '-50%'
-          }}
-        ></div>
-      </div>
+    <div className="absolute inset-0 -z-10 overflow-hidden bg-black">
+      <div className="absolute w-[80vw] h-[80vw] bg-black opacity-[0.1] rounded-full blur-[200px] animate-blackMove z-[-1] top-[10%] left-[10%]" />
+      <div
+        ref={blobRef1}
+        className="absolute w-[50vw] h-[50vw] rounded-full opacity-50 blur-[100px] mix-blend-screen bg-gradient-to-br from-amber-500 via-yellow-500 to-orange-400 animate-pulseBlob1 saturate-150 brightness-110"
+      />
+      <div
+        ref={blobRef2}
+        className="absolute w-[50vw] h-[50vw] rounded-full opacity-45 blur-[120px] mix-blend-overlay bg-gradient-to-br from-yellow-500 via-amber-600 to-orange-600 animate-pulseBlob2 saturate-150"
+      />
+      <div
+        ref={blobRef3}
+        className="absolute w-[50vw] h-[50vw] rounded-full opacity-50 blur-[150px] mix-blend-lighten bg-gradient-to-tr from-amber-600 via-yellow-500 to-orange-400 animate-pulseBlob3 brightness-125"
+      />
 
       <style jsx global>{`
-        @keyframes moveInCircle {
-          0% { transform: rotate(0deg); }
-          50% { transform: rotate(180deg); }
-          100% { transform: rotate(360deg); }
+        @keyframes pulseBlob1 {
+          0% { scale: 1; }
+          50% { scale: 1.2; }
+          100% { scale: 1; }
         }
-        
-        @keyframes moveVertical {
-          0% { transform: translateY(-50%); }
-          50% { transform: translateY(50%); }
-          100% { transform: translateY(-50%); }
+
+        @keyframes pulseBlob2 {
+          0% { scale: 1; }
+          50% { scale: 1.3; }
+          100% { scale: 1; }
         }
-        
-        @keyframes moveHorizontal {
-          0% { transform: translateX(-50%) translateY(-10%); }
-          50% { transform: translateX(50%) translateY(10%); }
-          100% { transform: translateX(-50%) translateY(-10%); }
+
+        @keyframes pulseBlob3 {
+          0% { scale: 1; }
+          50% { scale: 1.15; }
+          100% { scale: 1; }
+        }
+
+        .animate-pulseBlob1 {
+          animation: pulseBlob1 18s ease-in-out infinite;
+          top: -20%;
+          left: -10%;
+        }
+
+        .animate-pulseBlob2 {
+          animation: pulseBlob2 25s ease-in-out infinite;
+          bottom: -25%;
+          right: -20%;
+        }
+
+        .animate-pulseBlob3 {
+          animation: pulseBlob3 35s ease-in-out infinite;
+          top: 20%;
+          right: 0%;
+        }
+
+        @keyframes blackMove {
+          0% {
+            transform: translate(0, 0) scale(1);
+          }
+          25% {
+            transform: translate(-20%, 10%) scale(1.1);
+          }
+          50% {
+            transform: translate(15%, -10%) scale(0.9);
+          }
+          75% {
+            transform: translate(-10%, 20%) scale(1.05);
+          }
+          100% {
+            transform: translate(0, 0) scale(1);
+          }
+        }
+
+        .animate-blackMove {
+          animation: blackMove 40s ease-in-out infinite;
         }
       `}</style>
     </div>
