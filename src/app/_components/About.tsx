@@ -81,9 +81,9 @@ export default function About() {
       />
       </div>
 
-      <div className="text pt-20 flex justify-between items-center">
-        <h1 className='text-3xl'>Consciously creative and crafted for you. We deliver with <br /> precision and purpose no fluff, just fierce results.</h1>
-        <button className='uppercase border px-5 py-3 rounded-full flex gap-2 items-center hover:bg-white duration-500 cursor-pointer hover:text-black'>View Case Studies <FaArrowRight/></button>
+      <div className="text pt-20 lg:flex justify-between items-center">
+        <h1 className='text-3xl max-lg:text-center max-lg:text-2xl'>Consciously creative and crafted for you. We deliver with <br /> precision and purpose no fluff, just fierce results.</h1>
+        <button className='uppercase border px-5 py-3 rounded-full flex gap-2 items-center hover:bg-white duration-500 cursor-pointer hover:text-black max-lg:mx-auto max-lg:mt-5'>View Case Studies <FaArrowRight/></button>
       </div>
     </main>
   );

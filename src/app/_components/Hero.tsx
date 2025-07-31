@@ -33,7 +33,7 @@ const Hero = () => {
       <AnimatePresence>
         {showCursor && (
           <motion.div
-            className="fixed z-[9999] pointer-events-none w-28 h-28"
+            className="fixed z-[9999] pointer-events-none w-28 h-28 hidden lg:block"
             style={{ top: springY, left: springX }}
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -145,13 +145,13 @@ const Hero = () => {
       <div
         onMouseEnter={() => setShowCursor(true)}
         onMouseLeave={() => setShowCursor(false)}
-        className="relative z-50 px-10 pt-40"
+        className="relative z-50 px-5 lg:px-10 pt-40"
       >
-        <h1 className="text-7xl uppercase font-[600]">We build</h1>
-        <h1 className="text-9xl uppercase font-bold py-1">Digital</h1>
-        <h1 className="text-9xl uppercase font-bold">Experiences</h1>
+        <h1 className="text-3xl md:text-5xl lg:text-7xl uppercase font-[600] max-md:text-center">We build</h1>
+        <h1 className="text-6xl md:text-7xl lg:text-9xl uppercase font-bold py-1 max-md:text-center">Digital</h1>
+        <h1 className="text-[52px] md:text-7xl lg:text-9xl uppercase font-bold">Experiences</h1>
 
-        <h1 className="text-4xl leading-tight py-3 font-bold">
+        <h1 className="text-2xl lg:text-4xl leading-tight py-3 font-bold max-md:text-center">
           CRAFTING MODERN <br /> WEB SOLUTIONS FOR BRANDS
         </h1>
 
@@ -174,7 +174,7 @@ const Hero = () => {
           />
         </h2>
       </div>
-      <div className="absolute right-[4.5rem] top-0 h-full overflow-hidden z-40">
+      <div className="absolute lg:right-[4.5rem] top-0 h-full overflow-hidden z-40">
         <motion.div
           className="flex gap-5"
           animate={{ y: ["-10%", "-10%"] }}

@@ -109,7 +109,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-[#000000a6] text-white flex justify-between items-center px-6 py-4 z-[100]">
+    <header className="fixed top-0 left-0 w-full bg-[#000000a6] text-white flex justify-between items-center px-5 py-4 z-[100]">
       {/* Logo */}
       <div className="logo">
         <Image src="/header-logo.svg" alt="" width={190} height={70} className="cursor-pointer"/>
@@ -127,9 +127,9 @@ export default function Navbar() {
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setMenuOpen(true)}
-          className="w-12 h-12 bg-white text-black rounded-full hover:scale-110 duration-300 font-extrabold flex items-center justify-center cursor-pointer"
+          className="w-20 h-12 bg-white text-black rounded-full hover:scale-110 duration-300 font-extrabold flex items-center justify-center cursor-pointer"
         >
-          <TbMenuDeep size={20} />
+          <TbMenuDeep size={25}/>
         </motion.button>
       </div>
 

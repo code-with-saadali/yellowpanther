@@ -17,9 +17,9 @@ const Footer = () => {
   };
   return (
     <div className="pt-16 px-5 lg:px-20 bg-black text-white">
-      <div className="flex justify-between">
+      <div className="flex justify-between max-lg:flex-col">
         <div className="row1">
-          <h1 className="text-5xl flex flex-wrap gap-[1px] h-16 overflow-hidden cursor-pointer">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl flex flex-wrap gap-[1px] h-16 overflow-hidden cursor-pointer max-lg:justify-center">
             {email.split("").map((char, i) => (
               <motion.span
                 key={i}
@@ -51,13 +51,13 @@ const Footer = () => {
           </div>
         </div>
         <div className="row2">
-          <div className="icons flex items-center gap-3 text-2xl">
+          <div className="icons flex items-center gap-3 text-2xl max-md:justify-around">
             <FaLinkedin className="hover:text-[yellow] cursor-pointer hover:scale-110 duration-400" />
             <FaGithub className="hover:text-[yellow] cursor-pointer hover:scale-110 duration-400" />
             <FaInstagram className="hover:text-[yellow] cursor-pointer hover:scale-110 duration-400" />
             <FaXTwitter className="hover:text-[yellow] cursor-pointer hover:scale-110 duration-400" />
           </div>
-         <div className="coulm flex items-center gap-10">
+         <div className="coulm flex items-center max-lg:justify-around gap-10">
            <div className="coulm1 py-10">
             <h1 className="text-xl text-white/50 pb-5">Company</h1>
             <p className="hover:underline">About us</p>
@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
       </div>
 
-       <div className="flex justify-center items-center flex-1 relative overflow-hidden border-y mt-16">
+       <div className="flex justify-center items-center flex-1 relative overflow-hidden border-y mt-16 max-lg:mt-2">
         <motion.h1
           className="text-8xl max-lg:text-6xl font-semibold whitespace-nowrap py-10"
           animate={{ x: ["-25%", "25%"] }}
@@ -88,11 +88,11 @@ const Footer = () => {
          From Code to Creation – Web Experiences by Saad Ali.
         </motion.h1>
       </div>
-      <div className="policy flex justify-between py-10">
-        <h1 className="text-2xl">© 2025 <span className="text-yellow-400">Saad Ali</span>. All rights reserved</h1>
+      <div className="policy flex justify-between max-lg:gap-2 py-10 max-lg:flex-col">
+        <h1 className="text-2xl max-md:text-xl max-lg:text-center">© 2025 <span className="text-yellow-400">Saad Ali</span>. All rights reserved</h1>
         <button
           onClick={scrollToTop}
-          className="hover:text-yellow-400 transition-colors duration-600 flex items-center gap-2 cursor-pointer text-xl"
+          className="hover:text-yellow-400 transition-colors duration-600 flex items-center gap-2 cursor-pointer text-xl max-lg:mx-auto"
         >
           Back to Top
           <FaArrowUp className="border rounded-full p-2 text-3xl"/>

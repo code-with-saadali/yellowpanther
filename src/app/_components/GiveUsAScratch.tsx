@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 
 import React, { useEffect, useState } from "react";
+import AnimatedBackground from "./AnimatedBackground";
 
 const getTime = (timeZone: string) =>
   new Date().toLocaleTimeString("en-US", {
@@ -45,33 +46,117 @@ const GiveUsAScratch = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r to-[yellow] from-black text-white py-20 text-center relative overflow-hidden">
+    <div className="text-white py-20 text-center relative overflow-hidden">
+      <AnimatedBackground />
       <p className="text-white/80 text-lg md:text-3xl mb-2">
         On the prowl for a new platform?
       </p>
       <AnimatePresence>
         {showCursor && (
           <motion.div
-            className="fixed z-[9999] pointer-events-none"
-            style={{
-              top: springY,
-              left: springX,
-              width: 56,
-              height: 56,
-            }}
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="fixed z-[9999] pointer-events-none w-28 h-28"
+            style={{ top: springY, left: springX }}
+            initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.15 } }}
+            transition={{
+              type: "spring",
+              stiffness: 420,
+              damping: 20,
+              mass: 0.5,
+            }}
           >
-            <div
-              className="w-20 h-20 bg-black text-white text-[15px] font-semibold rounded-full flex items-center justify-center shadow-xl ring-4 ring-gray-300 select-none tracking-wide"
-              style={{
-                fontFamily: "'Poppins', sans-serif",
-                textShadow: "0 0 8px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              Explore
+            {/* Floating Particles */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_2px_rgba(255,255,255,0.3)]"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
+                  x: `calc(${Math.cos((i * 45 * Math.PI) / 180)} * 1.8rem)`,
+                  y: `calc(${Math.sin((i * 45 * Math.PI) / 180)} * 1.8rem)`,
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                  repeatDelay: 0.5,
+                }}
+              />
+            ))}
+
+            {/* Main Cursor */}
+            <div className="relative w-full h-full">
+              {/* Subtle glow background */}
+              <div className="absolute inset-0 rounded-full bg-white opacity-10 blur-sm" />
+
+              {/* Animated border */}
+              <motion.div
+                className="absolute inset-0 rounded-full border-[2px] border-white"
+                animate={{
+                  boxShadow: [
+                    "0 0 10px rgba(255,255,255,0.2)",
+                    "0 0 15px rgba(255,255,255,0.3)",
+                    "0 0 10px rgba(255,255,255,0.2)",
+                  ],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Inner Circle */}
+              <div className="absolute inset-2 rounded-full bg-black backdrop-blur-md flex items-center justify-center">
+                {/* Rotating Text */}
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 12,
+                    ease: "linear",
+                  }}
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <path
+                        id="circlePath"
+                        d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"
+                      />
+                    </defs>
+                    <text
+                      fill="white"
+                      fontSize="7"
+                      fontFamily="'Poppins', sans-serif"
+                      fontWeight="600"
+                      letterSpacing="2"
+                    >
+                      <textPath href="#circlePath" startOffset="0%">
+                        ✦ PLAY SHOWREEL ✦ PORTFOLIO ✦ SAAD ALI ✦
+                      </textPath>
+                    </text>
+                  </svg>
+                </motion.div>
+
+                {/* Center Pulse */}
+                <motion.div
+                  className="w-3 h-3 bg-white rounded-full z-20"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 3,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  }}
+                />
+              </div>
             </div>
           </motion.div>
         )}
@@ -86,7 +171,7 @@ const GiveUsAScratch = () => {
       <div className="w-full h-[0.5px] bg-white"></div>
 
       {/* Timezones */}
-      <div className="flex justify-between gap-6 mt-8 px-5 lg:px-24">
+      <div className="flex max-lg:flex-col justify-between gap-6 mt-8 px-5 lg:px-24">
         <div className="px-6 py-3 border rounded-full border-white text-lg font-semibold">
           <span className="text-white/70">PAKISTAN:</span> {pakTime}
         </div>

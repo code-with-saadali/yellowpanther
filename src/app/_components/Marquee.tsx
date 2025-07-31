@@ -37,7 +37,7 @@ const Marquee = () => {
   return (
     <div className="overflow-hidden py-5 bg-black">
         <div className="text lg:px-10 px-5 py-28">
-            <h1 className="text-6xl text-white font-bold">WHO WE WORK WITH</h1>
+            <h1 className="text-6xl text-white font-bold max-lg:text-center">WHO WE WORK WITH</h1>
         </div>
       {/* Marquee */}
       <div

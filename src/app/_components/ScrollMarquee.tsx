@@ -22,22 +22,22 @@ const ScrollMarquee = () => {
   }, []);
 
   const x = useTransform(
-  scrollYProgress,
-  [0, 1],
-  isMobile ? ['0%', '-100%'] : ['0%', '-135%']
-);
+    scrollYProgress,
+    [0, 1],
+    isMobile ? ['0%', '-100%'] : ['0%', '-135%']
+  );
 
-const y = useTransform(
-  scrollYProgress,
-  [0, 3],
-  ['0%', isMobile ? '140%' : '140%']
-);
+  const y = useTransform(
+    scrollYProgress,
+    [0, 3],
+    ['0%', isMobile ? '130%' : '140%']
+  );
 
- const scale = useTransform(
-  scrollYProgress,
-  [0, 2, 3],
-  [1, isMobile ? 1.2 : 1.4, isMobile ? 1.3 : 1.6]
-);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 2, 3],
+    [1, isMobile ? 1.1 : 1.4, isMobile ? 1.2 : 1.6]
+  );
 
   const opacity = useTransform(
     scrollYProgress,
@@ -46,13 +46,21 @@ const y = useTransform(
   );
 
   const getFontSize = useCallback(() => {
-  return isMobile ? '8vw' : '15vw';
-}, [isMobile]);
+    return isMobile ? '13vw' : '15vw';
+  }, [isMobile]);
+
+  const getRight = useCallback(() => {
+    return isMobile ? '-50%' : '-100%';
+  }, [isMobile]);
+
+  const getTop = useCallback(() => {
+    return isMobile ? '20%' : '10%';
+  }, [isMobile]);
 
   return (
     <div
       ref={containerRef}
-      className="h-[75vh] relative overflow-hidden"
+      className="h-[75vh] max-md:h-[25vh] relative overflow-hidden"
     >
       <motion.div
         className="absolute font-extrabold whitespace-nowrap pointer-events-none"
@@ -62,8 +70,8 @@ const y = useTransform(
           scale,
           opacity,
           fontSize: getFontSize(),
-          top: '10%',
-          right: '-100%',
+          right: getRight(),
+          top: getTop(),
           textShadow: '0px 5px 15px rgba(0,0,0,0.1)',
         }}
         transition={{
