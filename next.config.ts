@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     domains: [
       "ik.imagekit.io",
       "images.unsplash.com",
+      'source.unsplash.com',
     ],
   },
 };

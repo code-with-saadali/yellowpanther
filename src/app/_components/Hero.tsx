@@ -9,8 +9,10 @@ import {
 } from "framer-motion";
 import AnimatedBackground from "./AnimatedBackground";
 import Image from "next/image";
+import { BsPlayFill } from "react-icons/bs";
 
 const Hero = () => {
+  const [showVideo, setShowVideo] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
 
   const cursorX = useMotionValue(0);
@@ -20,136 +22,96 @@ const Hero = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 28);
-      cursorY.set(e.clientY - 28);
+      cursorX.set(e.clientX - 64); // half of button size
+      cursorY.set(e.clientY - 64);
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [cursorX, cursorY]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden text-white">
+    <div className="relative h-screen w-full overflow-hidden text-white"  onClick={() => setShowVideo(true)}>
       <AnimatedBackground />
+
+      {/* Rotating Play Button Cursor */}
       <AnimatePresence>
         {showCursor && (
-          <motion.div
-            className="fixed z-[9999] pointer-events-none w-28 h-28 hidden lg:block"
-            style={{ top: springY, left: springX }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.15 } }}
-            transition={{
-              type: "spring",
-              stiffness: 420,
-              damping: 20,
-              mass: 0.5,
-            }}
+          <motion.button
+            style={{ x: springX, y: springY }}
+            className="fixed w-32 h-32 pointer-events-none z-[1000]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            {/* Floating Particles */}
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_2px_rgba(255,255,255,0.3)]"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                  x: `calc(${Math.cos((i * 45 * Math.PI) / 180)} * 1.8rem)`,
-                  y: `calc(${Math.sin((i * 45 * Math.PI) / 180)} * 1.8rem)`,
-                }}
-                transition={{
-                  duration: 2,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  delay: i * 0.1,
-                  repeatDelay: 0.5,
-                }}
-              />
-            ))}
+            <div className="absolute inset-0 rounded-full bg-white z-0" />
 
-            {/* Main Cursor */}
-            <div className="relative w-full h-full">
-              {/* Subtle glow background */}
-              <div className="absolute inset-0 rounded-full bg-white opacity-10 blur-sm" />
+            {/* Rotating Text */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-full flex items-center justify-center z-10"
+            >
+              <svg className="w-full h-full" viewBox="0 0 100 100">
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+                  />
+                </defs>
+                <text fontSize="11" fill="black">
+                  <textPath xlinkHref="#circlePath" startOffset="0%">
+                    PLAY SHOWREEL • PLAY SHOWREEL • PLAY SHOWREEL •
+                  </textPath>
+                </text>
+              </svg>
+            </motion.div>
 
-              {/* Animated border */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-[2px] border-white"
-                animate={{
-                  boxShadow: [
-                    "0 0 10px rgba(255,255,255,0.2)",
-                    "0 0 15px rgba(255,255,255,0.3)",
-                    "0 0 10px rgba(255,255,255,0.2)",
-                  ],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* Inner Circle */}
-              <div className="absolute inset-2 rounded-full bg-black backdrop-blur-md flex items-center justify-center">
-                {/* Rotating Text */}
-                <motion.div
-                  className="absolute inset-0"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 12,
-                    ease: "linear",
-                  }}
-                >
-                  <svg viewBox="0 0 100 100" className="w-full h-full">
-                    <defs>
-                      <path
-                        id="circlePath"
-                        d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"
-                      />
-                    </defs>
-                    <text
-                      fill="white"
-                      fontSize="7"
-                      fontFamily="'Poppins', sans-serif"
-                      fontWeight="600"
-                      letterSpacing="2"
-                    >
-                      <textPath href="#circlePath" startOffset="0%">
-                        ✦ PLAY SHOWREEL ✦ PORTFOLIO ✦ SAAD ALI ✦
-                      </textPath>
-                    </text>
-                  </svg>
-                </motion.div>
-
-                {/* Center Pulse */}
-                <motion.div
-                  className="w-3 h-3 bg-white rounded-full z-20"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360],
-                  }}
-                  transition={{
-                    duration: 3,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                  }}
-                />
-              </div>
+            {/* Center Play Icon */}
+            <div className="absolute inset-8 bg-black rounded-full z-20 flex items-center justify-center">
+              <BsPlayFill className="text-yellow-400 w-6 h-6" />
             </div>
-          </motion.div>
+          </motion.button>
         )}
       </AnimatePresence>
 
+      {/* Video Modal */}
+      {showVideo && (
+        <div className="fixed inset-0 z-[1100] bg-black/80 flex items-center justify-center">
+          <div className="relative w-full max-w-4xl aspect-video">
+            <video
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-full rounded-lg"
+              src="https://ik.imagekit.io/msmrd69gi/all%20website.mp4?updatedAt=1748864437246"
+            />
+            <button
+              className="absolute top-2 right-2 bg-white text-black px-3 py-1 rounded cursor-pointer"
+              onClick={(e) => {
+              e.stopPropagation();
+              setShowVideo(false);
+            }}
+          >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       {/* Text Content */}
       <div
         onMouseEnter={() => setShowCursor(true)}
         onMouseLeave={() => setShowCursor(false)}
         className="relative z-50 px-5 lg:px-10 pt-40"
       >
-        <h1 className="text-3xl md:text-5xl lg:text-7xl uppercase font-[600] max-md:text-center">We build</h1>
-        <h1 className="text-6xl md:text-7xl lg:text-9xl uppercase font-bold py-1 max-md:text-center">Digital</h1>
-        <h1 className="text-[52px] md:text-7xl lg:text-9xl uppercase font-bold">Experiences</h1>
+        <h1 className="text-3xl md:text-5xl lg:text-7xl uppercase font-[600] max-md:text-center">
+          We build
+        </h1>
+        <h1 className="text-6xl md:text-7xl lg:text-9xl uppercase font-bold py-1 max-md:text-center">
+          Digital
+        </h1>
+        <h1 className="text-[52px] md:text-7xl lg:text-9xl uppercase font-bold">
+          Experiences
+        </h1>
 
         <h1 className="text-2xl lg:text-4xl leading-tight py-3 font-bold max-md:text-center">
           CRAFTING MODERN <br /> WEB SOLUTIONS FOR BRANDS
@@ -174,10 +136,12 @@ const Hero = () => {
           />
         </h2>
       </div>
+
+      {/* Floating Images */}
       <div className="absolute lg:right-[4.5rem] top-0 h-full overflow-hidden z-40">
         <motion.div
           className="flex gap-5"
-          animate={{ y: ["-10%", "-10%"] }}
+          animate={{ y: ["-31%", "-31%"] }}
           transition={{
             duration: 25,
             repeat: Infinity,
@@ -191,17 +155,20 @@ const Hero = () => {
               "https://ik.imagekit.io/msmrd69gi/7aIt5C65gWrogDgGG1mWPFyzsM.avif?updatedAt=1751374392792",
               "https://ik.imagekit.io/msmrd69gi/cfe4SQhxMtcArNzRWNEh6mklwxE.avif?updatedAt=1751110645452",
               "https://ik.imagekit.io/msmrd69gi/0I9OXKFwQY8NzxtZyoeJZRtY.avif?updatedAt=1751109183654",
+              "https://ik.imagekit.io/msmrd69gi/0I9OXKFwQY8NzxtZyoeJZRtY.avif?updatedAt=1751109183654",
             ],
             [
               "https://ik.imagekit.io/msmrd69gi/8Ou7m6Tc0flZz3yhClXwGhA8U.avif?updatedAt=1751107534201",
               "https://ik.imagekit.io/msmrd69gi/5kkmtIf0TPYac8MJsDrCXhyIb0c.png?updatedAt=1750951146664",
               "https://ik.imagekit.io/msmrd69gi/2006-glennon-wagner-charleston-backdrop-high-fashion-editorial-warmth-00006_web.jpg?updatedAt=1750947987875",
               "https://ik.imagekit.io/msmrd69gi/L7AHuVIdi7CVQYRWpBHlTYdVPsc.png?updatedAt=1750330502343",
+              "https://ik.imagekit.io/msmrd69gi/L7AHuVIdi7CVQYRWpBHlTYdVPsc.png?updatedAt=1750330502343",
             ],
             [
               "https://ik.imagekit.io/msmrd69gi/a6yHdu1OMuJ0monBsX1wo7Qo5pM.png?updatedAt=1750947953183f",
               "https://ik.imagekit.io/msmrd69gi/zoimqmwmPzQCsx9m3c9GwJ1A0XU.png?updatedAt=1751096411867",
               "https://ik.imagekit.io/msmrd69gi/80QJvYM3h4nosjsXGKDyoxZ2RU.png?updatedAt=1751100339228",
+              "https://ik.imagekit.io/msmrd69gi/rzbPtCB0tgIXOz1ypbASf10eVU.png?updatedAt=1751096412159",
               "https://ik.imagekit.io/msmrd69gi/rzbPtCB0tgIXOz1ypbASf10eVU.png?updatedAt=1751096412159",
             ],
           ].map((imageSet, i) => (

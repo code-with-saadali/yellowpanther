@@ -8,11 +8,11 @@ import { TbMenuDeep } from "react-icons/tb";
 import Image from "next/image";
 
 const menuItems = [
-  "Portfolio",
-  "Services",
-  "About Us",
-  "Join Us",
-  "Contact",
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Services", href: "/our-services" },
+  { label: "About Us", href: "/about" },
+  { label: "Join Us", href: "/join" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const overlayVariants = {
@@ -51,7 +51,13 @@ const itemVariants = {
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-const FlipLink = ({ children, href }: { children: React.ReactNode; href: string }) => {
+const FlipLink = ({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) => {
   const text = typeof children === "string" ? children : "";
 
   return (
@@ -111,25 +117,33 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full bg-[#000000a6] text-white flex justify-between items-center px-5 py-4 z-[100]">
       {/* Logo */}
-      <div className="logo">
-        <Image src="/header-logo.svg" alt="" width={190} height={70} className="cursor-pointer"/>
-      </div>
+      <Link href='/' className="logo">
+        <Image
+          src="/header-logo.svg"
+          alt=""
+          width={190}
+          height={70}
+          className="cursor-pointer"
+        />
+      </Link>
 
       {/* Buttons */}
       <div className="flex items-center gap-4">
-        <motion.button 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="border border-white rounded-full px-6 py-2 font-bold text-sm hover:bg-white hover:text-black transition max-md:hidden"
-        >
-          START A PROJECT?
-        </motion.button>
+        <Link href="/get-in-touch">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="border border-white cursor-pointer rounded-full px-6 py-2 font-bold text-sm hover:bg-white hover:text-black transition max-md:hidden"
+          >
+            START A PROJECT?
+          </motion.button>
+        </Link>
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setMenuOpen(true)}
           className="w-20 h-12 bg-white text-black rounded-full hover:scale-110 duration-300 font-extrabold flex items-center justify-center cursor-pointer"
         >
-          <TbMenuDeep size={25}/>
+          <TbMenuDeep size={25} />
         </motion.button>
       </div>
 
@@ -153,10 +167,10 @@ export default function Navbar() {
                 transition={{ duration: 0.8 }}
                 className="absolute inset-0 bg-gradient-to-br from-black via-[#1a1a1a] to-[#333]"
               />
-              
+
               {/* Subtle grid pattern */}
               <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-              
+
               {/* Floating particles */}
               {[...Array(20)].map((_, i) => (
                 <motion.div
@@ -165,7 +179,7 @@ export default function Navbar() {
                     x: Math.random() * 100 - 50,
                     y: Math.random() * 100 - 50,
                     opacity: 0,
-                    scale: 0.5
+                    scale: 0.5,
                   }}
                   animate={{
                     x: Math.random() * 100 - 50,
@@ -175,8 +189,8 @@ export default function Navbar() {
                     transition: {
                       duration: 20 + Math.random() * 20,
                       repeat: Infinity,
-                      repeatType: "reverse"
-                    }
+                      repeatType: "reverse",
+                    },
                   }}
                   className="absolute rounded-full bg-yellow-400"
                   style={{
@@ -187,8 +201,6 @@ export default function Navbar() {
                   }}
                 />
               ))}
-              
-              
             </div>
 
             {/* Content */}
@@ -209,13 +221,13 @@ export default function Navbar() {
               <div className="flex flex-col md:flex-row h-[calc(100%-80px)] px-6 md:px-16 pb-10">
                 {/* Left: Menu Links */}
                 <nav className="flex-1 flex flex-col justify-center gap-6 md:gap-10">
-                  {menuItems.map((text) => (
-                    <motion.div variants={itemVariants} key={text}>
-                      <FlipLink href="#">{text}</FlipLink>
+                  {menuItems.map(({ label, href }) => (
+                    <motion.div variants={itemVariants} key={label}>
+                      <FlipLink href={href}>{label}</FlipLink>
                     </motion.div>
                   ))}
                 </nav>
-                
+
                 {/* Right: Contact Info */}
                 <motion.aside
                   variants={itemVariants}
@@ -237,23 +249,28 @@ export default function Navbar() {
                       Social
                     </h4>
                     <ul className="flex flex-col gap-3 text-base opacity-80">
-                      {['LinkedIn', 'Twitter / X', 'Instagram', 'Dribbble'].map((social) => (
-                        <li key={social}>
-                          <motion.div
-                            whileHover={{ x: 5 }}
-                            className="flex items-center gap-3"
-                          >
-                            <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                            <Link href="#" className="hover:text-yellow-400 transition">
-                              {social}
-                            </Link>
-                          </motion.div>
-                        </li>
-                      ))}
+                      {["LinkedIn", "Twitter / X", "Instagram", "Dribbble"].map(
+                        (social) => (
+                          <li key={social}>
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              className="flex items-center gap-3"
+                            >
+                              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                              <Link
+                                href="#"
+                                className="hover:text-yellow-400 transition"
+                              >
+                                {social}
+                              </Link>
+                            </motion.div>
+                          </li>
+                        )
+                      )}
                     </ul>
                   </div>
 
-                  <motion.div 
+                  <motion.div
                     className="text-sm opacity-70 mt-4"
                     whileHover={{ opacity: 1 }}
                   >
