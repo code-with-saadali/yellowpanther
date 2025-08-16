@@ -19,13 +19,13 @@ const FollowUs = () => {
   return (
     <div className="bg-black text-white py-20">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 lg:px-20 mb-10">
-        <h2 className="text-4xl font-extrabold tracking-wide uppercase">
+      <div className="flex items-center justify-between px-5 lg:px-20 mb-10">
+        <h2 className="text-4xl font-extrabold tracking-wide uppercase max-md:mx-auto">
           FOLLOW US
         </h2>
         <a
           href="#"
-          className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 text-white px-6 py-2 rounded-full font-semibold shadow-md hover:opacity-90 transition"
+          className="bg-gradient-to-r max-md:hidden from-purple-500 via-pink-500 to-yellow-400 text-white px-6 py-2 rounded-full font-semibold shadow-md hover:opacity-90 transition"
         >
           GO TO FEED
         </a>

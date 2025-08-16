@@ -15,8 +15,12 @@ const BlogCard = () => {
           className="flex flex-col md:flex-row gap-6 items-center"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: index * 0.1 }}
-          viewport={{ once: true }}
+          transition={{
+            duration: 0.3,
+            delay: index * 0.01,
+            ease: "easeOut"
+          }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <div className="w-full lg:w-[40%] overflow-hidden rounded-md">
             <motion.div
