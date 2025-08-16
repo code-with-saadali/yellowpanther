@@ -1,15 +1,16 @@
 import React from 'react'
 import Hero from './_components/Hero'
-import ServiceTabs from './_components/ServiceTabs'
-import ProcessSteps from './_components/ProcessSteps'
+import Blog from './_components/Blog'
+import BlogCard from './_components/BlogCard'
 import GiveUsAScratch from '../_components/GiveUsAScratch'
+
 
 const page = () => {
   return (
     <div>
         <Hero/>
-        <ServiceTabs/>
-        <ProcessSteps/>
+        <Blog/>
+        <BlogCard/>
         <GiveUsAScratch/>
     </div>
   )

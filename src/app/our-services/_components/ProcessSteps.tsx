@@ -7,13 +7,15 @@ export default function ProcessSteps() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <div className="flex justify-around bg-black px-5">
-      {steps.map((step, index) => (
+    <div className="bg-black px-5 lg:px-20 min-h-screen">
+      <p className="text-white text-6xl uppercase font-bold">take a look at our 4d process</p>
+      <div className="flex justify-around pt-28">
+        {steps.map((step, index) => (
         <div
           key={index}
           onMouseEnter={() => setHovered(step)}
           onMouseLeave={() => setHovered(null)}
-          className="relative flex items-center justify-center h-[300px] w-[120px] sm:h-[400px] sm:w-[140px] transition-transform duration-300 hover:scale-110"
+          className="relative flex items-center justify-center h-[400px] w-[120px] sm:h-[400px] sm:w-[140px] transition-transform duration-300 hover:scale-110"
         >
           {/* Yellow Glow Background */}
           <div
@@ -23,11 +25,12 @@ export default function ProcessSteps() {
           />
 
           {/* Vertical Gradient Text */}
-          <p className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white text-5xl sm:text-7xl font-extrabold -rotate-90 tracking-tight z-10 transition-all duration-300">
+          <p className="text-transparent bg-clip-text bg-gradient-to-b from-white cursor-pointer via-white to-white text-5xl sm:text-7xl font-extrabold -rotate-90 tracking-tight z-10 transition-all duration-300">
             {step}
           </p>
         </div>
       ))}
+      </div>
     </div>
   );
 }

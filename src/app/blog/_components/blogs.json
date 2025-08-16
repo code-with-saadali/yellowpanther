@@ -1,0 +1,163 @@
+[
+  {
+    "id": 1,
+    "slug": "graphql-vs-rest",
+    "image": "https://ik.imagekit.io/msmrd69gi/xar3q5hp70iq5ugy5icvpoeh3yxm64hd.webp?updatedAt=1754392735269",
+    "description": "A comprehensive comparison between GraphQL and REST APIs for modern applications.",
+    "date": "05 July 2025"
+  },
+  {
+    "id": 2,
+    "slug": "tailwind-css-mastery",
+    "image": "https://ik.imagekit.io/msmrd69gi/xjvj6rsogpb942wellqd86l82m278h8s.webp?updatedAt=1754392735036",
+    "description": "Learn how to build fast, responsive websites with Tailwind CSS and utility-first design.",
+    "date": "02 August 2025"
+  },
+  {
+    "id": 3,
+     "slug": "react-2025",
+    "image": "https://ik.imagekit.io/msmrd69gi/rv7lfanov5rouyyuc7fumitcunzjyb1l.webp?updatedAt=1754392734745",
+    "description": "Discover why React remains one of the most popular JavaScript libraries for building modern UIs.",
+    "date": "28 July 2025"
+  },
+  {
+    "id": 4,
+     "slug": "web-performance",
+    "image": "https://ik.imagekit.io/msmrd69gi/rduao1hfutdct9q998ro6fbhjdgiz9co.webp?updatedAt=1754392734281",
+    "description": "Advanced techniques to optimize your website performance and achieve perfect Lighthouse scores.",
+    "date": "20 July 2025"
+  },
+  {
+    "id": 5,
+    "slug": "nextjs-13",
+    "image": "https://ik.imagekit.io/msmrd69gi/uc8mvtzasxl4wt4x3lo830e9hp6iq34c.webp?updatedAt=1754392733962",
+    "description": "Exploring the new features in Next.js 13 and how they can revolutionize your workflow.",
+    "date": "15 July 2025"
+  },
+  {
+    "id": 6,
+     "slug": "typescript-tips",
+    "image": "https://ik.imagekit.io/msmrd69gi/ug0zux7vol9efnrq3jl2mid7wh8wy8gd.webp?updatedAt=1754392733518",
+    "description": "TypeScript best practices that will make your code more maintainable and error-free.",
+    "date": "10 July 2025"
+  },
+  {
+    "id": 7,
+    "slug": "graphql-vs-rest",
+    "image": "https://ik.imagekit.io/msmrd69gi/myv2eza9ma2l3bfatrsn8x6surgvcx0g.webp?updatedAt=1754392732899",
+    "description": "A comprehensive comparison between GraphQL and REST APIs for modern applications.",
+    "date": "05 July 2025"
+  },
+  {
+    "id": 8,
+    "slug": "serverless-guide",
+    "image": "https://ik.imagekit.io/msmrd69gi/ej7a7rpmqjtwwu7a0ovzcxqhcxg2j7r1.webp?updatedAt=1754396963971",
+    "description": "How serverless architecture can reduce costs while improving scalability.",
+    "date": "30 June 2025"
+  },
+  {
+    "id": 9,
+    "slug": "ai-web-dev",
+    "image": "https://ik.imagekit.io/msmrd69gi/ia5dckhuxz6gs033g4bnfcb70rdsdere.webp?updatedAt=1754392732540",
+    "description": "The impact of AI tools like GitHub Copilot on modern web development workflows.",
+    "date": "25 June 2025"
+  },
+  {
+    "id": 10,
+     "slug": "web3-intro",
+    "image": "https://ik.imagekit.io/msmrd69gi/g9llsn23se4dw8smxmb9x6htnsyii1hr.webp?updatedAt=1754392732265",
+    "description": "Introduction to Web3 development: Building your first decentralized application.",
+    "date": "20 June 2025"
+  },
+  {
+    "id": 11,
+    "slug": "microfrontends",
+    "image": "https://ik.imagekit.io/msmrd69gi/0fchqp56fn2n7zd15cbyfru97gxg7o38.webp?updatedAt=1754392729054",
+    "description": "Microfrontends architecture: Breaking down monolithic frontend applications.",
+    "date": "15 June 2025"
+  },
+  {
+    "id": 12,
+     "slug": "design-systems",
+    "image": "https://ik.imagekit.io/msmrd69gi/eslc3cvkyh7vprwgfopudjpu638r6fv7.webp?updatedAt=1754392727892",
+    "description": "Creating scalable design systems for enterprise-level applications.",
+    "date": "10 June 2025"
+  },
+  {
+    "id": 13,
+    "slug": "web-accessibility",
+    "image": "https://ik.imagekit.io/msmrd69gi/eslc3cvkyh7vprwgfopudjpu638r6fv7.webp?updatedAt=1754392727892",
+    "description": "Web accessibility: Making your applications usable for everyone.",
+    "date": "05 June 2025"
+  },
+  {
+    "id": 14,
+    "slug": "testing-strategies",
+    "image": "https://ik.imagekit.io/msmrd69gi/0sj2q5fa1t7s79jxflwq189q2hfz16do.webp?updatedAt=1754392727939",
+    "description": "Comprehensive testing strategies for modern JavaScript applications.",
+    "date": "01 June 2025"
+  },
+  {
+    "id": 15,
+    "slug": "state-management",
+    "image": "https://ik.imagekit.io/msmrd69gi/dev5du5wbfl1vpzxmsts3t20seei22of.webp?updatedAt=1754392727765",
+    "description": "State management in 2025: Comparing Redux, Zustand, and Jotai.",
+    "date": "28 May 2025"
+  },
+  {
+    "id": 16,
+    "slug": "web-animations",
+    "image": "https://ik.imagekit.io/msmrd69gi/6gqdtl1c3dbns6k4yux18xq1cs1a2ftn.webp?updatedAt=1754392727682",
+    "description": "Creating stunning animations with Framer Motion and CSS.",
+    "date": "25 May 2025"
+  },
+  {
+    "id": 17,
+     "slug": "mobile-first",
+    "image": "https://ik.imagekit.io/msmrd69gi/5642mf66mppb97k9e7n6du5fjdgs6sn4.webp?updatedAt=1754384631853",
+    "description": "Mobile-first development: Techniques for perfect mobile experiences.",
+    "date": "20 May 2025"
+  },
+  {
+    "id": 18,
+    "slug": "technical-seo",
+    "image": "https://ik.imagekit.io/msmrd69gi/p7w783j8kv3xvc7aw5sel89sukzt57u4.webp?updatedAt=1754396964900",
+    "description": "Technical SEO strategies every web developer should know in 2025.",
+    "date": "15 May 2025"
+  },
+  {
+    "id": 19,
+     "slug": "web-security",
+    "image": "https://ik.imagekit.io/msmrd69gi/nchbh9ejz77mm0k9yyb3qi2gwds4v8i7.webp?updatedAt=1754396964126",
+    "description": "Web security best practices to protect your applications.",
+    "date": "10 May 2025"
+  },
+  {
+    "id": 20,
+     "slug": "performance-monitoring",
+    "image": "https://ik.imagekit.io/msmrd69gi/40ef34bjno8fte1wcnq8vv9udbdgi7m3.webp?updatedAt=1754392727432",
+    "description": "Implementing effective performance monitoring for production applications.",
+    "date": "05 May 2025"
+  },
+  {
+    "id": 21,
+     "slug": "edge-computing",
+    "image": "https://ik.imagekit.io/msmrd69gi/1k94den5j94hgr6q9562p5zfwam0yrlq.webp?updatedAt=1754392727599",
+    "description": "Edge computing and its impact on frontend development.",
+    "date": "01 May 2025"
+  },
+  {
+    "id": 22,
+     "slug": "web-components",
+    "image": "https://ik.imagekit.io/msmrd69gi/155fwzrgjwndxm0mgnfavkystj7o9gv7.webp?updatedAt=1754392727505",
+    "description": "The resurgence of Web Components in modern development.",
+    "date": "28 April 2025"
+  },
+  {
+    "id": 23,
+    "slug": "developer-productivity",
+    "image": "https://ik.imagekit.io/msmrd69gi/ia5dckhuxz6gs033g4bnfcb70rdsdere.webp?updatedAt=1754392732540f",
+    "description": "Tools and techniques to boost developer productivity in 2025.",
+    "date": "25 April 2025"
+  }
+]

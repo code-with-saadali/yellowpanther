@@ -10,9 +10,9 @@ import Image from "next/image";
 const menuItems = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Services", href: "/our-services" },
-  { label: "About Us", href: "/about" },
-  { label: "Join Us", href: "/join" },
-  { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
+  { label: "Join Us", href: "/join-us" },
+  { label: "Contact", href: "/get-in-touch" },
 ];
 
 const overlayVariants = {
