@@ -22,7 +22,7 @@ const Hero = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 64); // half of button size
+      cursorX.set(e.clientX - 64); 
       cursorY.set(e.clientY - 64);
     };
     window.addEventListener("mousemove", handleMouseMove);
